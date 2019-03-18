@@ -1,14 +1,22 @@
-﻿using Slovom.SpellerRules;
+﻿using Slovom.InternalSpellers;
 
 namespace Slovom
 {
     public class BgNumberSpeller
     {
-        private static readonly INumberSpeller s_spellingRules;
+        private static readonly INumberSpeller s_speller;
 
         static BgNumberSpeller()
         {
-            s_spellingRules = new HeadSpeller(new RuleN999999999());
+            var digitsSpeller = new DigitSpeller();
+            var numTo19Speller = new NumbersTo19Speller(digitsSpeller);
+            var tensSpeller = new TensSpeller(numTo19Speller);
+            var hundredsSpeller = new HundredsSpeller(tensSpeller);
+            var thousandsSpeller = new ThousandsSpeller(hundredsSpeller);
+            var millionsSpeller = new MillionsSpeller(thousandsSpeller);
+            var billionsSpeller = new BillionsSpeller(millionsSpeller);
+
+            s_speller = new ZeroSpeller(billionsSpeller);
         }
 
         public string Spell(int number)
@@ -20,7 +28,7 @@ namespace Slovom
                 number = number * (-1);
             }
 
-            SpelledNumber result = s_spellingRules.Spell((uint)number);
+            SpelledNumber result = s_speller.Spell((uint)number);
             
             return (isNegative ? "минус " : "") + result;
         }

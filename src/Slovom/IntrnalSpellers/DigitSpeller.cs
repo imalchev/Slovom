@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Slovom.SpellerRules
+namespace Slovom.InternalSpellers
 {
     /// <summary>
     /// Speller for numbers up to 9
     /// </summary>
-    internal class RuleN9 : INumberSpeller
+    internal class DigitSpeller : INumberSpeller
     {
         public SpelledNumber Spell(uint number, Gender gender = Gender.Neutral)
         {

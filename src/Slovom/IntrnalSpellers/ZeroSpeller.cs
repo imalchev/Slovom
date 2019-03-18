@@ -1,10 +1,10 @@
-﻿namespace Slovom.SpellerRules
+﻿namespace Slovom.InternalSpellers
 {
-    internal class HeadSpeller : INumberSpeller
+    internal class ZeroSpeller : INumberSpeller
     {
         private readonly INumberSpeller _maxNumberSpeller;
 
-        public HeadSpeller(INumberSpeller maxNumberSpeller)
+        public ZeroSpeller(INumberSpeller maxNumberSpeller)
         {
             _maxNumberSpeller = maxNumberSpeller;
         }

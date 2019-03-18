@@ -1,14 +1,22 @@
-﻿namespace Slovom.SpellerRules
+﻿namespace Slovom.InternalSpellers
 {
-    internal class RuleN999999999 : INumberSpeller
+    /// <summary>
+    /// Represents algorithm capable to spell numbers up to 999 milions
+    /// </summary>
+    internal class MillionsSpeller : INumberSpeller
     {
-        private readonly INumberSpeller _speller999999 = new RuleN999999();
+        private readonly INumberSpeller _thousandsSpeller;
+
+        public MillionsSpeller(INumberSpeller thousandsSpeller)
+        {
+            _thousandsSpeller = thousandsSpeller;
+        }
 
         public SpelledNumber Spell(uint number, Gender gender = Gender.Neutral)
         {
             if (number < 1_000_000)
             {
-                return _speller999999.Spell(number, gender);
+                return _thousandsSpeller.Spell(number, gender);
             }
 
             uint milions = number / 1_000_000;
@@ -20,7 +28,7 @@
             }
             else
             {
-                SpelledNumber spelled = _speller999999.Spell(milions, Gender.Male);
+                SpelledNumber spelled = _thousandsSpeller.Spell(milions, Gender.Male);
 
                 milionsSpelled = new SpelledNumber(spelled.Number * 1_000_000, spelled.Spelled + " милиона", spelled.ContainsAnd);
             }
@@ -32,7 +40,7 @@
                 return milionsSpelled;
             }
 
-            return milionsSpelled.Concat(_speller999999.Spell(reminder));
+            return milionsSpelled.Concat(_thousandsSpeller.Spell(reminder));
         }
     }
 }

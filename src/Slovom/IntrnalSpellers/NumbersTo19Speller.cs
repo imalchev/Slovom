@@ -1,19 +1,24 @@
 ﻿using System;
 
-namespace Slovom.SpellerRules
+namespace Slovom.InternalSpellers
 {
     /// <summary>
     /// Speller for numbers up to 19
     /// </summary>
-    internal class RuleN19 : INumberSpeller
+    internal class NumbersTo19Speller : INumberSpeller
     {
-        private INumberSpeller ruleN9 = new RuleN9();
+        private INumberSpeller _digitsSpeller;
+
+        public NumbersTo19Speller(INumberSpeller digitsSpeller)
+        {
+            _digitsSpeller = digitsSpeller;
+        }
 
         public SpelledNumber Spell(uint number, Gender gender = Gender.Neutral)
         {
             if (number < 10)
             {
-                return ruleN9.Spell(number, gender);
+                return _digitsSpeller.Spell(number, gender);
             }
 
             string result;

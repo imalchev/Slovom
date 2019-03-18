@@ -1,19 +1,24 @@
 ﻿using System;
 
-namespace Slovom.SpellerRules
+namespace Slovom.InternalSpellers
 {
     /// <summary>
     /// Speller for numbers up to 999
     /// </summary>
-    internal class RuleN999 : INumberSpeller
+    internal class HundredsSpeller : INumberSpeller
     {
-        private readonly INumberSpeller _rule99 = new RuleN99();
+        private readonly INumberSpeller _tensSpeller;
+
+        public HundredsSpeller(INumberSpeller tensSpeller)
+        {
+            _tensSpeller = tensSpeller;
+        }
 
         public SpelledNumber Spell(uint number, Gender gender = Gender.Neutral)
         {
             if (number < 100)
             {
-                return _rule99.Spell(number, gender);
+                return _tensSpeller.Spell(number, gender);
             }
 
             uint hundreds = (number / 100) * 100;
@@ -27,14 +32,7 @@ namespace Slovom.SpellerRules
                 return left;
             }
 
-            return left.Concat(_rule99.Spell(reminder, gender));
-
-            // if (reminder < 20 || reminder % 10 == 0)
-            // {
-            //     return hundredsInWords + " и " + _rule99.Spell(reminder, gender);
-            // }
-            // 
-            // return hundredsInWords + " " + _rule99.Spell(reminder);
+            return left.Concat(_tensSpeller.Spell(reminder, gender));
         }
 
         private string GetHundreds(uint number)

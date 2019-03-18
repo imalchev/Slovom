@@ -1,34 +1,39 @@
 ﻿using System;
 
-namespace Slovom.SpellerRules
+namespace Slovom.InternalSpellers
 {
     /// <summary>
     /// Speller for numbers up to 99
     /// </summary>
-    internal class RuleN99 : INumberSpeller
+    internal class TensSpeller : INumberSpeller
     {
-        private readonly INumberSpeller _rule19 = new RuleN19();
+        private readonly INumberSpeller _spellerNumberTill19;
+
+        public TensSpeller(INumberSpeller speller19)
+        {
+            _spellerNumberTill19 = speller19;
+        }
 
         public SpelledNumber Spell(uint number, Gender gender = Gender.Neutral)
         {
             if (number < 20)
             {
-                return _rule19.Spell(number, gender);
+                return _spellerNumberTill19.Spell(number, gender);
             }
 
             uint tens = (number / 10) * 10;
 
-            string head = GetTens(tens);
+            string tensInWords = GetTens(tens);
+
+            var tensSpelled = new SpelledNumber(tens, GetTens(tens), false);
 
             uint reminder = number % 10;
             if (reminder == 0)
             {
-                return new SpelledNumber(tens, head, false);
+                return tensSpelled;
             }
 
-            string result = head + " и " + _rule19.Spell(reminder, gender);
-
-            return new SpelledNumber(number, result, true);
+            return tensSpelled.Concat(_spellerNumberTill19.Spell(reminder, gender));
         }
 
         private string GetTens(uint number)

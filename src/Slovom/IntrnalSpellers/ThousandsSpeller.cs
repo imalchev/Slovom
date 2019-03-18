@@ -1,14 +1,22 @@
-﻿namespace Slovom.SpellerRules
+﻿namespace Slovom.InternalSpellers
 {
-    internal class RuleN999999 : INumberSpeller
+    /// <summary>
+    /// Represents algorithm for spelling numbers up to 999 999
+    /// </summary>
+    internal class ThousandsSpeller : INumberSpeller
     {
-        private readonly INumberSpeller _speller999 = new RuleN999();
+        private readonly INumberSpeller _hundredsSpeller;
+
+        public ThousandsSpeller(INumberSpeller hundredsSpeller)
+        {
+            _hundredsSpeller = hundredsSpeller;
+        }
 
         public SpelledNumber Spell(uint number, Gender gender = Gender.Neutral)
         {
-            if (number < 1000)
+            if (number < 1_000)
             {
-                return _speller999.Spell(number, gender);
+                return _hundredsSpeller.Spell(number, gender);
             }
 
             uint thousands = number / 1_000;
@@ -20,7 +28,7 @@
             }
             else
             {
-                SpelledNumber spelled = _speller999.Spell(thousands, Gender.Female);
+                SpelledNumber spelled = _hundredsSpeller.Spell(thousands, Gender.Female);
 
                 thousandsSpelled = new SpelledNumber(spelled.Number * 1_000, spelled.Spelled + " хиляди", spelled.ContainsAnd);
             }
@@ -32,7 +40,7 @@
                 return thousandsSpelled;
             }
 
-            return thousandsSpelled.Concat(_speller999.Spell(reminder));
+            return thousandsSpelled.Concat(_hundredsSpeller.Spell(reminder));
         }
     }
 }

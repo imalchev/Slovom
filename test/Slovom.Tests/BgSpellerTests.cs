@@ -150,5 +150,19 @@ namespace Tests
             // Assert
             Assert.AreEqual(expected, inWords);
         }
+
+        [TestCase(int.MaxValue, "два милиардa сто четиридесет и седем милиона четиристотин осемдесет и три хиляди шестстотин четиридесет и седем")]
+        [TestCase(int.MinValue, "минус два милиардa сто четиридесет и седем милиона четиристотин осемдесет и три хиляди шестстотин четиридесет и осем")]
+        public void Spell_Should_Spell_MaxAndMinLongNumber(int number, string expected)
+        {
+            // Arrange
+            var sut = new BgNumberSpeller();
+
+            // Act
+            string inWords = sut.Spell(number);
+
+            // Assert
+            Assert.AreEqual(expected, inWords);
+        }
     }
 }
