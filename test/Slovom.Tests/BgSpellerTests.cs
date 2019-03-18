@@ -23,7 +23,7 @@ namespace Tests
         public void Spell_Should_Spell_Positive_Digits_Correctly(int number, string result)
         {
             // Arrange
-            var sut = new BgSpeller();
+            var sut = new BgNumberSpeller();
 
             // Act
             string inWords = sut.Spell(number);
@@ -44,7 +44,7 @@ namespace Tests
         public void Spell_Should_Spell_Negative_Digits_Correctly(int number, string result)
         {
             // Arrange
-            var sut = new BgSpeller();
+            var sut = new BgNumberSpeller();
 
             // Act
             string inWords = sut.Spell(number);
@@ -70,7 +70,7 @@ namespace Tests
         public void Spell_Should_Spell_TwoDigitNumbers_Correctly(int number, string expected)
         {
             // Arrange
-            var sut = new BgSpeller();
+            var sut = new BgNumberSpeller();
 
             // Act
             string inWords = sut.Spell(number);
@@ -86,12 +86,63 @@ namespace Tests
         [TestCase(250, "двеста и петдесет")]        
         [TestCase(468, "четиристотин шестдесет и осем")]
         [TestCase(500, "петстотин")]
+        [TestCase(630, "шестстотин и тридесет")]
+        [TestCase(719, "седемстотин и деветнадесет")]
         [TestCase(870, "осемстотин и седемдесет")]
         [TestCase(999, "деветстотин деветдесет и девет")]
         public void Spell_Should_Spell_ThreeDigitNumbers_Correctly(int number, string expected)
         {
             // Arrange
-            var sut = new BgSpeller();
+            var sut = new BgNumberSpeller();
+
+            // Act
+            string inWords = sut.Spell(number);
+
+            // Assert
+            Assert.AreEqual(expected, inWords);
+        }
+
+        [TestCase(1_000, "хиляда")]
+        [TestCase(2_001, "две хиляди и едно")]
+        [TestCase(10_045, "десет хиляди четиридесет и пет")]
+        [TestCase(99_999, "деветдесет и девет хиляди деветстотин деветдесет и девет")]
+        [TestCase(100_000, "сто хиляди")]
+        [TestCase(100_100, "сто хиляди и сто")]
+        [TestCase(100_090, "сто хиляди и деветдесет")]
+        [TestCase(100_099, "сто хиляди деветдесет и девет")]
+        [TestCase(101_099, "сто и една хиляди деветдесет и девет")]
+        [TestCase(468_123, "четиристотин шестдесет и осем хиляди сто двадесет и три")]
+        [TestCase(500_011, "петстотин хиляди и единадесет")]
+        [TestCase(634_100, "шестстотин тридесет и четири хиляди и сто")]
+        [TestCase(715_000, "седемстотин и петнадесет хиляди")]
+        public void Spell_Should_Spell_UpToSixDigitNumbers_Correctly(int number, string expected)
+        {
+            // Arrange
+            var sut = new BgNumberSpeller();
+
+            // Act
+            string inWords = sut.Spell(number);
+
+            // Assert
+            Assert.AreEqual(expected, inWords);
+        }
+
+        [TestCase(1_000_000, "един милион")]
+        [TestCase(2_030_005, "два милиона тридесет хиляди и пет")]
+        [TestCase(50_010_045, "петдесет милиона десет хиляди четиридесет и пет")]
+        [TestCase(99_999_999, "деветдесет и девет милиона деветстотин деветдесет и девет хиляди деветстотин деветдесет и девет")]
+        [TestCase(100_000_000, "сто милиона")]
+        [TestCase(100_100_000, "сто милиона и сто хиляди")]
+        [TestCase(100_090_000, "сто милиона и деветдесет хиляди")]
+        [TestCase(247_100_100, "двеста четиридесет и седем милиона сто хиляди и сто")]
+        [TestCase(303_000_011, "триста и три милиона и единадесет")]
+        [TestCase(411_001_000, "четиристотин и единадесет милиона и хиляда")]
+        [TestCase(537_010_000, "петстотин тридесет и седем милиона и десет хиляди")]
+        [TestCase(600_700_101, "шестстотин милиона седемстотин хиляди сто и едно")]
+        public void Spell_Should_Spell_UpToNineDigitNumbers_Correctly(int number, string expected)
+        {
+            // Arrange
+            var sut = new BgNumberSpeller();
 
             // Act
             string inWords = sut.Spell(number);

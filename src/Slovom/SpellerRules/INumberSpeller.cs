@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Slovom.SpellerRules
 {
-    internal interface ISpellingRule
+    internal interface INumberSpeller
     {
-        bool Match(ushort number);
-
-        string Spell(ushort number);
+        SpelledNumber Spell(uint number, Gender gender = Gender.Neutral);
     }
 }
