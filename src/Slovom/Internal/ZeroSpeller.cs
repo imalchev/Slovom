@@ -1,19 +1,17 @@
 ﻿namespace Slovom.Internal
 {
-    internal class ZeroSpeller : INumberSpeller
+    internal class ZeroSpeller : ChainedSpeller
     {
-        private readonly INumberSpeller _maxNumberSpeller;
-
-        public ZeroSpeller(INumberSpeller maxNumberSpeller)
+        public ZeroSpeller(Speller maxNumberSpeller)
+            : base(maxNumberSpeller)
         {
-            _maxNumberSpeller = maxNumberSpeller;
         }
 
-        public SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
+        public override SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
         {
             if (number > 0)
             {
-                return _maxNumberSpeller.Spell(number);
+                return InnerSpeller.Spell(number, gender);
             }
 
             return new SpelledNumber("нула", false);

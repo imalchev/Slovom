@@ -3,22 +3,20 @@
 namespace Slovom.Internal
 {
     /// <summary>
-    /// Speller for numbers up to 99
+    /// Speller for numbers up to 99. If number is less than 20 - inner speller is used.
     /// </summary>
-    internal class TensSpeller : INumberSpeller
+    internal class TensSpeller : ChainedSpeller
     {
-        private readonly INumberSpeller _spellerNumberTill19;
-
-        public TensSpeller(INumberSpeller speller19)
+        public TensSpeller(Speller speller19)
+            : base(speller19)
         {
-            _spellerNumberTill19 = speller19;
         }
 
-        public SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
+        public override SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
         {
             if (number < 20)
             {
-                return _spellerNumberTill19.Spell(number, gender);
+                return InnerSpeller.Spell(number, gender);
             }
 
             ulong tens = (number / 10) * 10;
@@ -32,7 +30,7 @@ namespace Slovom.Internal
                 return tensSpelled;
             }
 
-            return tensSpelled.Concat(_spellerNumberTill19.Spell(reminder, gender));
+            return tensSpelled.Concat(InnerSpeller.Spell(reminder, gender));
         }
 
         private string GetTens(ulong number)

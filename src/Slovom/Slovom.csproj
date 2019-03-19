@@ -1,7 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net35;net45;netstandard1.0;netstandard2.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Authors>Ivo Malchev</Authors>
+    <Copyright>Copyright Ivo Malchev © 2019</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Slovom</PackageId>
+    <Version>0.5.0</Version>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/imalchev/Slovom</RepositoryUrl>
+    <LicenseUrl>https://github.com/imalchev/Slovom/blob/master/LICENSE</LicenseUrl>
+    <PackageProjectUrl>https://github.com/imalchev/Slovom</PackageProjectUrl>
+    <PackageTags>slovom;number;words;bulgarian;spelling;</PackageTags>
+    <AssemblyName>Slovom</AssemblyName>
   </PropertyGroup>
-
+  
 </Project>

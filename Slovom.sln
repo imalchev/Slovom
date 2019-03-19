@@ -7,6 +7,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Slovom", "src\Slovom\Slovom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Slovom.Tests", "test\Slovom.Tests\Slovom.Tests.csproj", "{3FAA4BD5-BED9-488F-B16F-5B0EE47B7E59}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{7CD4679B-C8F8-4BA6-BFDD-AD171DBCAB9B}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CA1F63FF-05B4-4040-8A6D-A4D0C585192E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5D2075E4-3F6D-4D22-ACCD-100E9383B724}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +34,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7DF2B376-B4A8-4D10-A9F3-00964090AF68} = {CA1F63FF-05B4-4040-8A6D-A4D0C585192E}
+		{3FAA4BD5-BED9-488F-B16F-5B0EE47B7E59} = {5D2075E4-3F6D-4D22-ACCD-100E9383B724}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7DC268A-D77F-4EE4-AEC4-446B17A792F8}

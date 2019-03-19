@@ -5,9 +5,9 @@ namespace Slovom.Internal
     /// <summary>
     /// Speller for numbers up to 9
     /// </summary>
-    internal class DigitSpeller : INumberSpeller
+    internal class DigitSpeller : Speller
     {
-        public SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
+        public override SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
         {
             string result;
             switch (number)

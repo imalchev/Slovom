@@ -1,45 +1,47 @@
 ﻿namespace Slovom.Internal
 {
-    internal class GenericSpeller : INumberSpeller
+    /// <summary>
+    /// Spells numbers using generic algorithm. Spells the upper part over <see cref="GenericSpellerSettings.Magnitude"/>
+    /// </summary>
+    internal class GenericSpeller : ChainedSpeller
     {
-        private readonly INumberSpeller _childSpeller;
         private readonly GenericSpellerSettings _settings;
 
-        public GenericSpeller(INumberSpeller childSpeller, GenericSpellerSettings settings)
+        public GenericSpeller(Speller childSpeller, GenericSpellerSettings settings)
+            : base(childSpeller)
         {
-            _childSpeller = childSpeller;
             _settings = settings;
         }
 
-        public SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
+        public override SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
         {
             if (number < _settings.Magnitude)
             {
-                return _childSpeller.Spell(number, gender);
+                return InnerSpeller.Spell(number, gender);
             }
 
             ulong numberOfUnits = number / _settings.Magnitude;
 
-            SpelledNumber thousandsSpelled;
+            SpelledNumber unitsSpelled;
             if (numberOfUnits == 1)
             {
-                thousandsSpelled = new SpelledNumber(_settings.Singular, false);
+                unitsSpelled = new SpelledNumber(_settings.Singular, false);
             }
             else
             {
-                SpelledNumber spelled = _childSpeller.Spell(numberOfUnits, _settings.SpellingGender);
+                SpelledNumber spelled = InnerSpeller.Spell(numberOfUnits, _settings.SpellingGender);
 
-                thousandsSpelled = new SpelledNumber(spelled.Spelled + _settings.PluralSuffix, spelled.ContainsAnd);
+                unitsSpelled = new SpelledNumber(spelled.Spelled + _settings.PluralSuffix, spelled.ContainsAnd);
             }
 
             ulong reminder = number % _settings.Magnitude;
 
             if (reminder == 0)
             {
-                return thousandsSpelled;
+                return unitsSpelled;
             }
 
-            return thousandsSpelled.Concat(_childSpeller.Spell(reminder));
+            return unitsSpelled.Concat(InnerSpeller.Spell(reminder, gender));
         }
     }
 }

@@ -3,36 +3,36 @@
 namespace Slovom.Internal
 {
     /// <summary>
-    /// Speller for numbers up to 999
+    /// Speller for numbers up to 999. If number is less than 100 _tensSpeller is used to spell the number.
     /// </summary>
-    internal class HundredsSpeller : INumberSpeller
+    internal class HundredsSpeller : ChainedSpeller
     {
-        private readonly INumberSpeller _tensSpeller;
+        // private readonly Speller _tensSpeller;
 
-        public HundredsSpeller(INumberSpeller tensSpeller)
+        public HundredsSpeller(Speller tensSpeller)
+            : base(tensSpeller)
         {
-            _tensSpeller = tensSpeller;
+            // _tensSpeller = tensSpeller;
         }
 
-        public SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
+        public override SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
         {
             if (number < 100)
             {
-                return _tensSpeller.Spell(number, gender);
+                return InnerSpeller.Spell(number, gender);
             }
 
             ulong hundreds = (number / 100) * 100;
-            string hundredsInWords = GetHundreds(hundreds);
 
-            SpelledNumber left = new SpelledNumber(hundredsInWords, false);
+            SpelledNumber hundredsInWords = new SpelledNumber(GetHundreds(hundreds), false);
 
             ulong reminder = number % 100;
             if (reminder == 0)
             {
-                return left;
+                return hundredsInWords;
             }
 
-            return left.Concat(_tensSpeller.Spell(reminder, gender));
+            return hundredsInWords.Concat(InnerSpeller.Spell(reminder, gender));
         }
 
         private string GetHundreds(ulong number)

@@ -2,22 +2,21 @@
 
 namespace Slovom.Internal
 {
-    /// Speller for numbers up to 19
+    /// <summary>
+    /// Speller for numbers up to 19. If number is less than 10 spelling is provided to its child elements.
     /// </summary>
-    internal class NumbersTo19Speller : INumberSpeller
+    internal class NumbersTo19Speller : ChainedSpeller
     {
-        private INumberSpeller _digitsSpeller;
-
-        public NumbersTo19Speller(INumberSpeller digitsSpeller)
+        public NumbersTo19Speller(Speller digitsSpeller)
+            : base(digitsSpeller)
         {
-            _digitsSpeller = digitsSpeller;
         }
 
-        public SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
+        public override SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
         {
             if (number < 10)
             {
-                return _digitsSpeller.Spell(number, gender);
+                return InnerSpeller.Spell(number, gender);
             }
 
             string result;
