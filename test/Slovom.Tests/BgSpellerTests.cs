@@ -5,11 +5,6 @@ namespace Tests
 {
     public class BgSpellerTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [TestCase(0, "нула")]
         [TestCase(1, "едно")]
         [TestCase(2, "две")]
@@ -151,8 +146,8 @@ namespace Tests
             Assert.AreEqual(expected, inWords);
         }
 
-        [TestCase(int.MaxValue, "два милиардa сто четиридесет и седем милиона четиристотин осемдесет и три хиляди шестстотин четиридесет и седем")]
-        [TestCase(int.MinValue, "минус два милиардa сто четиридесет и седем милиона четиристотин осемдесет и три хиляди шестстотин четиридесет и осем")]
+        [TestCase(int.MaxValue, "два милиарда сто четиридесет и седем милиона четиристотин осемдесет и три хиляди шестстотин четиридесет и седем")]
+        [TestCase(int.MinValue, "минус два милиарда сто четиридесет и седем милиона четиристотин осемдесет и три хиляди шестстотин четиридесет и осем")]
         public void Spell_Should_Spell_MaxAndMinLongNumber(int number, string expected)
         {
             // Arrange

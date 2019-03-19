@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Slovom.InternalSpellers
+namespace Slovom.Internal
 {
     /// <summary>
     /// Speller for numbers up to 999
@@ -14,19 +14,19 @@ namespace Slovom.InternalSpellers
             _tensSpeller = tensSpeller;
         }
 
-        public SpelledNumber Spell(uint number, Gender gender = Gender.Neutral)
+        public SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
         {
             if (number < 100)
             {
                 return _tensSpeller.Spell(number, gender);
             }
 
-            uint hundreds = (number / 100) * 100;
+            ulong hundreds = (number / 100) * 100;
             string hundredsInWords = GetHundreds(hundreds);
 
-            SpelledNumber left = new SpelledNumber(hundreds, hundredsInWords, false);
+            SpelledNumber left = new SpelledNumber(hundredsInWords, false);
 
-            uint reminder = number % 100;
+            ulong reminder = number % 100;
             if (reminder == 0)
             {
                 return left;
@@ -35,7 +35,7 @@ namespace Slovom.InternalSpellers
             return left.Concat(_tensSpeller.Spell(reminder, gender));
         }
 
-        private string GetHundreds(uint number)
+        private string GetHundreds(ulong number)
         {
             switch (number)
             {
@@ -49,7 +49,7 @@ namespace Slovom.InternalSpellers
                 case 800: return "осемстотин";
                 case 900: return "деветстотин";
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(number), $"'{nameof(HundredsSpeller)}' can't spell number {number}!");
             }
         }
     }

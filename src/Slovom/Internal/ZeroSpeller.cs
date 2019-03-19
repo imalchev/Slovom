@@ -1,4 +1,4 @@
-﻿namespace Slovom.InternalSpellers
+﻿namespace Slovom.Internal
 {
     internal class ZeroSpeller : INumberSpeller
     {
@@ -9,14 +9,14 @@
             _maxNumberSpeller = maxNumberSpeller;
         }
 
-        public SpelledNumber Spell(uint number, Gender gender = Gender.Neutral)
+        public SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
         {
             if (number > 0)
             {
                 return _maxNumberSpeller.Spell(number);
             }
 
-            return new SpelledNumber(0, "нула", false);
+            return new SpelledNumber("нула", false);
         }
     }
 }

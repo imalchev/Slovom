@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Slovom.InternalSpellers
+namespace Slovom.Internal
 {
     /// <summary>
     /// Speller for numbers up to 9
     /// </summary>
     internal class DigitSpeller : INumberSpeller
     {
-        public SpelledNumber Spell(uint number, Gender gender = Gender.Neutral)
+        public SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
         {
             string result;
             switch (number)
@@ -21,10 +21,10 @@ namespace Slovom.InternalSpellers
                 case 7: result = "седем"; break;
                 case 8: result = "осем"; break;
                 case 9: result = "девет"; break;
-                default: throw new ArgumentOutOfRangeException();
+                default: throw new ArgumentOutOfRangeException(nameof(number), $"'{nameof(DigitSpeller)}' is can't spell number {number}!");
             }
 
-            return new SpelledNumber(number, result, false);
+            return new SpelledNumber(result, false);
         }
     }
 }

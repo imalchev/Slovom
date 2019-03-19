@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace Slovom.InternalSpellers
+namespace Slovom.Internal
 {
-    /// <summary>
     /// Speller for numbers up to 19
     /// </summary>
     internal class NumbersTo19Speller : INumberSpeller
@@ -14,7 +13,7 @@ namespace Slovom.InternalSpellers
             _digitsSpeller = digitsSpeller;
         }
 
-        public SpelledNumber Spell(uint number, Gender gender = Gender.Neutral)
+        public SpelledNumber Spell(ulong number, Gender gender = Gender.Neutral)
         {
             if (number < 10)
             {
@@ -35,10 +34,10 @@ namespace Slovom.InternalSpellers
                 case 18: result = "осемнадесет"; break;
                 case 19: result = "деветнадесет"; break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(number), $"'{nameof(NumbersTo19Speller)}' is can't spell number {number}!");
             }
 
-            return new SpelledNumber(number, result, false);
+            return new SpelledNumber(result, false);
         }
     }
 }

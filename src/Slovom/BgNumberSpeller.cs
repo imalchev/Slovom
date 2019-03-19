@@ -1,4 +1,4 @@
-﻿using Slovom.InternalSpellers;
+﻿using Slovom.Internal;
 
 namespace Slovom
 {
@@ -12,9 +12,10 @@ namespace Slovom
             var numTo19Speller = new NumbersTo19Speller(digitsSpeller);
             var tensSpeller = new TensSpeller(numTo19Speller);
             var hundredsSpeller = new HundredsSpeller(tensSpeller);
-            var thousandsSpeller = new ThousandsSpeller(hundredsSpeller);
-            var millionsSpeller = new MillionsSpeller(thousandsSpeller);
-            var billionsSpeller = new BillionsSpeller(millionsSpeller);
+
+            var thousandsSpeller = new GenericSpeller(hundredsSpeller, new GenericSpellerSettings(1_000, "хиляда", " хиляди", Gender.Female));
+            var millionsSpeller = new GenericSpeller(thousandsSpeller, new GenericSpellerSettings(1_000_000, "един милион", " милиона", Gender.Male));
+            var billionsSpeller = new GenericSpeller(millionsSpeller, new GenericSpellerSettings(1_000_000_000, "един милиард", " милиарда", Gender.Male));
 
             s_speller = new ZeroSpeller(billionsSpeller);
         }
