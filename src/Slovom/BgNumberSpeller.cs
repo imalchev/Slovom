@@ -13,7 +13,14 @@ namespace Slovom
     {
         private static readonly Speller s_speller;
 
+        /// <summary>
+        /// Maximum number that the library can spell.
+        /// </summary>
         public const long MaxSpellableNumber = 999_999_999_999_999;
+
+        /// <summary>
+        /// Minimum number that the library can spell.
+        /// </summary>
         public const long MinSpellableNumber = -999_999_999_999_999;
 
         static BgNumberSpeller()

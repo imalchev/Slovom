@@ -1,9 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Summary>.net library for spelling numbers into bulgarian language</Summary>
+    <Description>.net library for spelling numbers into bulgarian language</Description>
     <TargetFrameworks>net35;net45;netstandard1.0;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Authors>Ivo Malchev</Authors>
     <Copyright>Copyright Ivo Malchev © 2019</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -15,6 +17,8 @@
     <PackageProjectUrl>https://github.com/imalchev/Slovom</PackageProjectUrl>
     <PackageTags>slovom;number;words;bulgarian;spelling;</PackageTags>
     <AssemblyName>Slovom</AssemblyName>
+    <AssemblyVersion>0.5.0.0</AssemblyVersion>
+    <FileVersion>0.5.0.0</FileVersion>
   </PropertyGroup>
   
 </Project>
