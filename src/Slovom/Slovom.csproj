@@ -10,15 +10,15 @@
     <Copyright>Copyright Ivo Malchev © 2019</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Slovom</PackageId>
-    <Version>0.5.0</Version>
+    <Version>0.6.0</Version>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/imalchev/Slovom</RepositoryUrl>
     <LicenseUrl>https://github.com/imalchev/Slovom/blob/master/LICENSE</LicenseUrl>
     <PackageProjectUrl>https://github.com/imalchev/Slovom</PackageProjectUrl>
     <PackageTags>slovom;number;words;bulgarian;spelling;</PackageTags>
     <AssemblyName>Slovom</AssemblyName>
-    <AssemblyVersion>0.5.0.0</AssemblyVersion>
-    <FileVersion>0.5.0.0</FileVersion>
+    <AssemblyVersion>0.6.0.0</AssemblyVersion>
+    <FileVersion>0.6.0.0</FileVersion>
   </PropertyGroup>
   
 </Project>

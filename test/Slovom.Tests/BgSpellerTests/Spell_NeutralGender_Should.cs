@@ -145,6 +145,20 @@ namespace Slovom.Tests.BgSpellerTests
 
         [TestCase(int.MaxValue, "два милиарда сто четиридесет и седем милиона четиристотин осемдесет и три хиляди шестстотин четиридесет и седем")]
         [TestCase(int.MinValue, "минус два милиарда сто четиридесет и седем милиона четиристотин осемдесет и три хиляди шестстотин четиридесет и осем")]
+        public void Spell_MaxAndMinIntNumber(long number, string expected)
+        {
+            // Arrange
+            var sut = new BgNumberSpeller();
+
+            // Act
+            string inWords = sut.Spell(number);
+
+            // Assert
+            Assert.AreEqual(expected, inWords);
+        }
+
+        [TestCase(long.MaxValue, "девет квинталиона двеста двадесет и три квадрилиона триста седемдесет и два трилиона тридесет и шест милиарда осемстотин петдесет и четири милиона седемстотин седемдесет и пет хиляди осемстотин и седем")]
+        [TestCase(long.MinValue, "минус девет квинталиона двеста двадесет и три квадрилиона триста седемдесет и два трилиона тридесет и шест милиарда осемстотин петдесет и четири милиона седемстотин седемдесет и пет хиляди осемстотин и осем")]
         public void Spell_MaxAndMinLongNumber(long number, string expected)
         {
             // Arrange

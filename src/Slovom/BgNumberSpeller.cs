@@ -13,16 +13,6 @@ namespace Slovom
     {
         private static readonly Speller s_speller;
 
-        /// <summary>
-        /// Maximum number that the library can spell.
-        /// </summary>
-        public const long MaxSpellableNumber = 999_999_999_999_999;
-
-        /// <summary>
-        /// Minimum number that the library can spell.
-        /// </summary>
-        public const long MinSpellableNumber = -999_999_999_999_999;
-
         static BgNumberSpeller()
         {
             var digitsSpeller = new DigitSpeller();
@@ -30,44 +20,34 @@ namespace Slovom
             var tensSpeller = new TensSpeller(numTo19Speller);
             var hundredsSpeller = new HundredsSpeller(tensSpeller);
             var thousandsSpeller = new GenericSpeller(
-                childSpeller: hundredsSpeller,
-                settings: new GenericSpellerSettings(1_000, "хиляда", " хиляди", Gender.Female));
+                    childSpeller: hundredsSpeller,
+                    settings: new GenericSpellerSettings(1_000, "хиляда", " хиляди", Gender.Female));
             var millionsSpeller = new GenericSpeller(
-                childSpeller: thousandsSpeller, 
-                settings: new GenericSpellerSettings(1_000_000, "един милион", " милиона", Gender.Male));
+                    childSpeller: thousandsSpeller, 
+                    settings: new GenericSpellerSettings(1_000_000, "един милион", " милиона", Gender.Male));
             var billionsSpeller = new GenericSpeller(
-                childSpeller: millionsSpeller,
-                settings: new GenericSpellerSettings(1_000_000_000, "един милиард", " милиарда", Gender.Male));
+                    childSpeller: millionsSpeller,
+                    settings: new GenericSpellerSettings(1_000_000_000, "един милиард", " милиарда", Gender.Male));
             var trillionsSpeller = new GenericSpeller(
-                childSpeller: billionsSpeller,
-                settings: new GenericSpellerSettings(1_000_000_000_000, "един трилион", " трилиона", Gender.Male));
+                    childSpeller: billionsSpeller,
+                    settings: new GenericSpellerSettings(1_000_000_000_000, "един трилион", " трилиона", Gender.Male));
+            var kvadrilionsSpeller = new GenericSpeller(
+                    childSpeller: trillionsSpeller,
+                    settings: new GenericSpellerSettings(1_000_000_000_000_000, "един квадрилион", " квадрилиона", Gender.Male));
+            var kvintalionsSpeller = new GenericSpeller(
+                    childSpeller: kvadrilionsSpeller,
+                    settings: new GenericSpellerSettings(1_000_000_000_000_000_000, "един квинталион", " квинталиона", Gender.Male));
 
-            s_speller = new ZeroSpeller(trillionsSpeller);
+            s_speller = new ZeroSpeller(kvintalionsSpeller);
         }
 
         /// <summary>
-        /// Checks if <paramref name="number"/> can be spelled. False if <paramref name="number"/> is out of range of the spellable numbers by the library.
-        /// </summary>
-        public bool CanSpell(long number) => number >= MinSpellableNumber && number <= MaxSpellableNumber;
-
-        /// <summary>
-        /// Spells number up bigger than <see cref="MinSpellableNumber"/> and less than <see cref="MaxSpellableNumber"/>
+        /// Spells number 
         /// </summary>
         /// <param name="number">The integer number to spell</param>
         /// <param name="gender">The gender to spell. This matters only for the singular part of the number: "един", "една", "едно".</param>
-        /// <exception cref="ArgumentOutOfRangeException">If <paramref name="number"/> is beyond supported range of numbers.</exception>
         public string Spell(long number, Gender gender = Gender.Neutral)
         {
-            if (number > MaxSpellableNumber)
-            {
-                throw new ArgumentOutOfRangeException(nameof(number), $"The library supports max number of {MaxSpellableNumber}");
-            }
-
-            if (number < MinSpellableNumber)
-            {
-                throw new ArgumentOutOfRangeException(nameof(number), $"The library supports max number of {MaxSpellableNumber}");
-            }
-
             bool isNegative = false;
             if (number < 0)
             {

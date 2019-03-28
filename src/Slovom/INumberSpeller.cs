@@ -6,11 +6,6 @@
     public interface INumberSpeller
     {
         /// <summary>
-        /// Checks if number can be spelled. If it can't <see cref="Spell(long, Gender)"/> will throw an exception.
-        /// </summary>
-        bool CanSpell(long number);
-
-        /// <summary>
         /// Spells number <paramref name="number"/> into written language words.
         /// </summary>
         /// <param name="number">The number to be spelled</param>
