@@ -8,11 +8,9 @@ It is build upon `.net standard 1.0`, `.net standard 2.0`, `.net full framework 
 
 ## Instalation
 You can install Slovom using [NuGet](https://www.nuget.org/packages/Slovom):
-
 ```
 Install-Package Slovom
 ```
-
 Or via the .NET Core command line interface:
 ```
 dotnet add package Slovom
@@ -35,7 +33,6 @@ string female = speller.Spell(number, Gender.Female); // spells the number in fe
 MIT License
 
 ## Reference
-
 The library is aware of [gramatical gender](https://en.wikipedia.org/wiki/Grammatical_gender).
 
 Some info about names of big numbers [wikipedia](https://bg.wikipedia.org/wiki/%D0%98%D0%BC%D0%B5%D0%BD%D0%B0_%D0%BD%D0%B0_%D1%87%D0%B8%D1%81%D0%BB%D0%B0%D1%82%D0%B0)

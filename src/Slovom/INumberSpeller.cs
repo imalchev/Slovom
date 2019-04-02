@@ -6,11 +6,17 @@
     public interface INumberSpeller
     {
         /// <summary>
-        /// Spells number <paramref name="number"/> into written language words.
+        /// Spells <paramref name="number"/> into written language words.
         /// </summary>
         /// <param name="number">The number to be spelled</param>
         /// <param name="gender">Grammatical gender to spell in. If it does matter.</param>
-        /// <returns></returns>
         string Spell(long number, Gender gender = Gender.Neutral);
+
+        /// <summary>
+        /// Spell <paramref name="number"/> as it is an order
+        /// </summary>
+        /// <param name="number">The number to be spelled</param>
+        /// <param name="gender"></param>
+        string SpellOrdinal(long number, Gender gender = Gender.Neutral);
     }
 }

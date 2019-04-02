@@ -38,5 +38,32 @@ namespace Slovom.Internal
 
             return new SpelledNumber(result, false);
         }
+
+        public override SpelledNumber SpellOrdinal(ulong number, Gender gender = Gender.Neutral)
+        {
+            if (number < 10)
+            {
+                return InnerSpeller.SpellOrdinal(number, gender);
+            }
+
+            string result;
+            switch (number)
+            {
+                case 10: result = (gender == Gender.Male ? "десети" : gender == Gender.Female ? "десета" : "десето"); break;
+                case 11: result = (gender == Gender.Male ? "единадесети" : gender == Gender.Female ? "единадесета" : "единадесето"); break;
+                case 12: result = (gender == Gender.Male ? "дванадесети" : gender == Gender.Female ? "дванадесета" : "дванадесето"); break;
+                case 13: result = (gender == Gender.Male ? "тринадесети" : gender == Gender.Female ? "тринадесета" : "тринадесето"); break;
+                case 14: result = (gender == Gender.Male ? "четиринадесети" : gender == Gender.Female ? "четиринадесета" : "четиринадесето"); break;
+                case 15: result = (gender == Gender.Male ? "петнадесети" : gender == Gender.Female ? "петнадесета" : "петнадесето"); break;
+                case 16: result = (gender == Gender.Male ? "шестнадесети" : gender == Gender.Female ? "шестнадесета" : "шестнадесето"); break;
+                case 17: result = (gender == Gender.Male ? "седемнадесети" : gender == Gender.Female ? "седемнадесета" : "седемнадесето"); break;
+                case 18: result = (gender == Gender.Male ? "осемнадесети" : gender == Gender.Female ? "осемнадесета" : "осемнадесето"); break;
+                case 19: result = (gender == Gender.Male ? "деветнадесети" : gender == Gender.Female ? "деветнадесета" : "деветнадесето"); break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(number), $"'{nameof(NumbersTo19Speller)}' is can't spell number {number}!");
+            }
+
+            return new SpelledNumber(result, false);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Slovom.Internal;
+using Slovom.Internal.OrdinalSpellers;
 using System;
 
 namespace Slovom
@@ -56,6 +57,26 @@ namespace Slovom
             }
 
             SpelledNumber result = s_speller.Spell((ulong)number, gender);
+
+            return (isNegative ? "минус " : "") + result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="gender"></param>
+        /// <returns></returns>
+        public string SpellOrdinal(long number, Gender gender = Gender.Neutral)
+        {
+            bool isNegative = false;
+            if (number < 0)
+            {
+                isNegative = true;
+                number = number * (-1);
+            }
+
+            SpelledNumber result = s_speller.SpellOrdinal((ulong)number, gender);
 
             return (isNegative ? "минус " : "") + result;
         }
