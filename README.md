@@ -25,6 +25,8 @@ INumberSpeller speller = new BgNumberSpeller();
 string neutral = speller.Spell(number); // spells the number in a neutral gender
 
 string female = speller.Spell(number, Gender.Female); // spells the number in female gender
+
+string ordinal = speller.SpellOrdinal(number, Gender.Male); // spells number ordinal 
 ```
 
 ## Perforamnce
@@ -35,4 +37,6 @@ MIT License
 ## Reference
 The library is aware of [gramatical gender](https://en.wikipedia.org/wiki/Grammatical_gender).
 
-Some info about names of big numbers [wikipedia](https://bg.wikipedia.org/wiki/%D0%98%D0%BC%D0%B5%D0%BD%D0%B0_%D0%BD%D0%B0_%D1%87%D0%B8%D1%81%D0%BB%D0%B0%D1%82%D0%B0)
+The library supports spelling ordinal numbers.
+
+Some info about names of big numbers [wikipedia](https://bg.wikipedia.org/wiki/%D0%98%D0%BC%D0%B5%D0%BD%D0%B0_%D0%BD%D0%B0_%D1%87%D0%B8%D1%81%D0%BB%D0%B0%D1%82%D0%B0).

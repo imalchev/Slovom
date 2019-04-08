@@ -81,10 +81,10 @@
         {
             if (numberOfUnits == 1)
             {
-                return gender == Gender.Male ? "хиляден" : gender == Gender.Female ? "хилядна" : "хилядно";
+                return _settings.GetOrdinalSuffix(gender);
             }
 
-            return InnerSpeller.Spell(numberOfUnits) + (gender == Gender.Male ? " хиляден" : gender == Gender.Female ? " хилядна" : " хилядно");
-        }
+            return InnerSpeller.Spell(numberOfUnits, _settings.SpellingGender) + " " + _settings.GetOrdinalSuffix(gender);
+        }        
     }
 }

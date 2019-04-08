@@ -1,6 +1,5 @@
 ﻿using Slovom.Internal;
 using Slovom.Internal.OrdinalSpellers;
-using System;
 
 namespace Slovom
 {
@@ -22,22 +21,22 @@ namespace Slovom
             var hundredsSpeller = new HundredsSpeller(tensSpeller);
             var thousandsSpeller = new GenericSpeller(
                     childSpeller: hundredsSpeller,
-                    settings: new GenericSpellerSettings(1_000, "хиляда", " хиляди", Gender.Female));
+                    settings: new GenericSpellerSettings(1_000, "хиляда", " хиляди", Gender.Female, "хиляден", "хилядна", "хилядно"));
             var millionsSpeller = new GenericSpeller(
                     childSpeller: thousandsSpeller, 
-                    settings: new GenericSpellerSettings(1_000_000, "един милион", " милиона", Gender.Male));
+                    settings: new GenericSpellerSettings(1_000_000, "един милион", " милиона", Gender.Male, "милионен", "милионна", "милионно"));
             var billionsSpeller = new GenericSpeller(
                     childSpeller: millionsSpeller,
-                    settings: new GenericSpellerSettings(1_000_000_000, "един милиард", " милиарда", Gender.Male));
+                    settings: new GenericSpellerSettings(1_000_000_000, "един милиард", " милиарда", Gender.Male, "милиарден", "милиардна", "милиардно"));
             var trillionsSpeller = new GenericSpeller(
                     childSpeller: billionsSpeller,
-                    settings: new GenericSpellerSettings(1_000_000_000_000, "един трилион", " трилиона", Gender.Male));
+                    settings: new GenericSpellerSettings(1_000_000_000_000, "един трилион", " трилиона", Gender.Male, "трилионен", "трилионна", "трилионно"));
             var kvadrilionsSpeller = new GenericSpeller(
                     childSpeller: trillionsSpeller,
-                    settings: new GenericSpellerSettings(1_000_000_000_000_000, "един квадрилион", " квадрилиона", Gender.Male));
+                    settings: new GenericSpellerSettings(1_000_000_000_000_000, "един квадрилион", " квадрилиона", Gender.Male, "квадрилионен", "квадрилионна", "квадрилионно"));
             var kvintalionsSpeller = new GenericSpeller(
                     childSpeller: kvadrilionsSpeller,
-                    settings: new GenericSpellerSettings(1_000_000_000_000_000_000, "един квинталион", " квинталиона", Gender.Male));
+                    settings: new GenericSpellerSettings(1_000_000_000_000_000_000, "един квинталион", " квинталиона", Gender.Male, "квинталионен", "квинталионна", "квинталионно"));
 
             s_speller = new ZeroSpeller(kvintalionsSpeller);
         }

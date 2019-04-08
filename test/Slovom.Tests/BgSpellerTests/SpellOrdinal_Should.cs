@@ -40,7 +40,7 @@ namespace Slovom.Tests.BgSpellerTests
         [TestCase(18, Gender.Female, "осемнадесета")]
         [TestCase(19, Gender.Neutral, "деветнадесето")]
         [TestCase(19, Gender.Female, "деветнадесета")]
-        public void Spell_Positive_Numbers_UpTo19_Correctly(long number, Gender gender, string result)
+        public void Spell_Positive_Numbers_From_10_UpTo_19_Correctly(long number, Gender gender, string result)
         {
             // Arrange
             var sut = new BgNumberSpeller();
@@ -62,7 +62,7 @@ namespace Slovom.Tests.BgSpellerTests
         [TestCase(78, Gender.Male, "седемдесет и осми")]
         [TestCase(90, Gender.Male, "деветдесети")]
         [TestCase(93, Gender.Female, "деветдесет и трета")]
-        public void Spell_Positive_Numbers_UpTo99_Correctly(long number, Gender gender, string result)
+        public void Spell_Positive_Numbers_From_20_UpTo_99_Correctly(long number, Gender gender, string result)
         {
             // Arrange
             var sut = new BgNumberSpeller();
@@ -87,7 +87,7 @@ namespace Slovom.Tests.BgSpellerTests
         [TestCase(713, Gender.Female, "седемстотин и тринадесета")]
         [TestCase(780, Gender.Male, "седемстотин и осемдесети")]
         [TestCase(909, Gender.Female, "деветстотин и девета")]
-        public void Spell_Positive_Numbers_UpTo999_Correctly(long number, Gender gender, string result)
+        public void Spell_Positive_Numbers_From_100_UpTo_999_Correctly(long number, Gender gender, string result)
         {
             // Arrange
             var sut = new BgNumberSpeller();
@@ -111,7 +111,15 @@ namespace Slovom.Tests.BgSpellerTests
         [TestCase(2_150, Gender.Female, "две хиляди сто и петдесета")]
         [TestCase(33_000, Gender.Male, "тридесет и три хиляден")]
         [TestCase(100_000, Gender.Female, "сто хилядна")]
-        public void Spell_Positive_Numbers_UpTo999_999_Correctly(long number, Gender gender, string result)
+        [TestCase(100_011, Gender.Neutral, "сто хиляди и единадесето")]
+        [TestCase(100_110, Gender.Male, "сто хиляди сто и десети")]
+        [TestCase(101_000, Gender.Male, "сто и една хиляден")]
+        [TestCase(101_000, Gender.Female, "сто и една хилядна")]
+        [TestCase(102_000, Gender.Male, "сто и две хиляден")]
+        [TestCase(102_000, Gender.Female, "сто и две хилядна")]
+        [TestCase(102_000, Gender.Neutral, "сто и две хилядно")]
+        [TestCase(321_123, Gender.Neutral, "триста двадесет и една хиляди сто двадесет и трето")]
+        public void Spell_Positive_Numbers_From_1_000_UpTo_999_999_Correctly(long number, Gender gender, string result)
         {
             // Arrange
             var sut = new BgNumberSpeller();
@@ -122,6 +130,52 @@ namespace Slovom.Tests.BgSpellerTests
             // Assert
             Assert.AreEqual(result, inWords);
         }
+
+        [TestCase(1_000_000, Gender.Male, "милионен")]
+        [TestCase(1_000_000, Gender.Female, "милионна")]
+        [TestCase(1_000_001, Gender.Male, "един милион и първи")]
+        [TestCase(1_100_000, Gender.Female, "един милион и сто хилядна")]
+        [TestCase(2_000_000, Gender.Male, "два милионен")]
+        [TestCase(2_000_000, Gender.Female, "два милионна")]
+        [TestCase(2_000_000, Gender.Neutral, "два милионно")]
+        [TestCase(2_000_001, Gender.Neutral, "два милиона и първо")]
+        [TestCase(2_000_019, Gender.Female, "два милиона и деветнадесета")]
+        [TestCase(2_123_150, Gender.Female, "два милиона сто двадесет и три хиляди сто и петдесета")]
+        [TestCase(33_000_000, Gender.Male, "тридесет и три милионен")]
+        [TestCase(100_000_000, Gender.Female, "сто милионна")]
+        [TestCase(100_100_011, Gender.Neutral, "сто милиона сто хиляди и единадесето")]
+        [TestCase(111_100_110, Gender.Male, "сто и единадесет милиона сто хиляди сто и десети")]
+        public void Spell_Positive_Numbers_From_1_000_000_UpTo_999_999_999_Correctly(long number, Gender gender, string result)
+        {
+            // Arrange
+            var sut = new BgNumberSpeller();
+
+            // Act
+            string inWords = sut.SpellOrdinal(number, gender);
+
+            // Assert
+            Assert.AreEqual(result, inWords);
+        }
+
+        [TestCase(1_000_000_000, Gender.Female, "милиардна")]
+        [TestCase(1_000_000_100, Gender.Male, "един милиард и стотен")]
+        [TestCase(315_111_100_000, Gender.Neutral, "триста и петнадесет милиарда сто и единадесет милиона и сто хилядно")]
+        [TestCase(1_000_000_000_000, Gender.Neutral, "трилионно")]
+        [TestCase(1_000_000_000_000, Gender.Female, "трилионна")]
+        [TestCase(1_000_000_000_000_000, Gender.Male, "квадрилионен")]
+        [TestCase(1_000_000_000_000_000, Gender.Female, "квадрилионна")]
+        public void Spell_Positive_Numbers_Bigger_Than_999_999_999_Correctly(long number, Gender gender, string result)
+        {
+            // Arrange
+            var sut = new BgNumberSpeller();
+
+            // Act
+            string inWords = sut.SpellOrdinal(number, gender);
+
+            // Assert
+            Assert.AreEqual(result, inWords);
+        }
+
 
         [TestCase(-0, Gender.Male, "нулев")]
         [TestCase(0, Gender.Female, "нулева")]
