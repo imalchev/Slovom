@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Summary>.net library for spelling numbers into bulgarian language</Summary>
     <Description>.net library for spelling numbers into bulgarian language</Description>
-    <TargetFrameworks>net35;net45;netstandard1.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard1.0;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Authors>Ivo Malchev</Authors>

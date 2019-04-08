@@ -4,7 +4,7 @@
 ## General
 `Slovom` is small .net library for spelling numbers in bulgarian language.
 The library have no external dependencies.
-It is build upon `.net standard 1.0`, `.net standard 2.0`, `.net full framework 3.5` and `.net full framework 4.5`
+It is build upon `.net standard 1.0`, `.net standard 2.0` and `.net full framework 4.5`
 
 ## Instalation
 You can install Slovom using [NuGet](https://www.nuget.org/packages/Slovom):
