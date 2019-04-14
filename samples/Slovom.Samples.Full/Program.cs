@@ -9,20 +9,28 @@ namespace Slovom.Samples.Full
             Console.WriteLine("Please enter a number to spell!");
             Console.Write("> ");
 
-            string input = Console.ReadLine();
-
-            long number;
-            while (!long.TryParse(input, out number))
+            string input;
+            do
             {
-                Console.WriteLine("Invalid number! Try again!");
+                input = Console.ReadLine();
+
+                long number;
+                while (!long.TryParse(input, out number))
+                {
+                    Console.WriteLine("Invalid number! Try again!");
+                    Console.Write("> ");
+                    input = Console.ReadLine();
+                }
+
+                INumberSpeller speller = new BgNumberSpeller();
+
+                string numberInWords = speller.Spell(number, Gender.Female);
+
+                Console.WriteLine(numberInWords);
                 Console.Write("> ");
             }
+            while (input.ToUpper() != "EXIT");
 
-            INumberSpeller speller = new BgNumberSpeller();
-
-            string numberInWords = speller.Spell(number, Gender.Female);
-
-            Console.WriteLine(numberInWords);
             Console.ReadLine();
         }
     }

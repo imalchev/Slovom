@@ -10,7 +10,7 @@ namespace Slovom.Benchmark
         private INumberSpeller _speller = new BgNumberSpeller();
 
         [Params(1, 1_002, 10_000, 4_263_246_324, long.MaxValue, -235_235, int.MinValue)]
-        public int Number;
+        public long Number;
 
         [GlobalSetup]
         public void Setup()
