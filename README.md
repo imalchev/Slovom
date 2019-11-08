@@ -2,9 +2,9 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/s0vgb4m8tv9ar7we?svg=true)](https://ci.appveyor.com/project/imalchev/slovom) [![NuGet](https://img.shields.io/nuget/v/Slovom.svg)](https://www.nuget.org/packages/Slovom)
 
 ## General
-`Slovom` is small .net library for spelling numbers in bulgarian language.
+`Slovom` is small .net library for spelling numbers in Bulgarian language.
 The library have no external dependencies.
-It is build upon `.net standard 1.0`, `.net standard 2.0` and `.net full framework 4.5`
+It is build upon `.net standard 1.0`, `.net standard 2.0`, `.net standard 2.1` and `.net full framework 4.5`
 
 ## Instalation
 You can install Slovom using [NuGet](https://www.nuget.org/packages/Slovom):
@@ -17,7 +17,7 @@ dotnet add package Slovom
 ```
 
 ## Usage
-Using the library is extreamly easy:
+Using the library is extremely easy:
 	
 ```cs
 INumberSpeller speller = new BgNumberSpeller();
@@ -33,79 +33,78 @@ string ordinal = speller.SpellOrdinal(number, Gender.Male); // spells number ord
 
 ``` ini
 
-BenchmarkDotNet=v0.11.5, OS=Windows 10.0.17763.437 (1809/October2018Update/Redstone5)
-Intel Core i5-3230M CPU 2.60GHz (Ivy Bridge), 1 CPU, 4 logical and 2 physical cores
-.NET Core SDK=2.2.105
-  [Host] : .NET Core 2.2.3 (CoreCLR 4.6.27414.05, CoreFX 4.6.27414.05), 64bit RyuJIT
-  Clr    : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.3362.0
-  Core   : .NET Core 2.2.3 (CoreCLR 4.6.27414.05, CoreFX 4.6.27414.05), 64bit RyuJIT
-  CoreRT : .NET CoreRT 1.0.27527.01 @BuiltBy: dlab14-DDVSOWINAGE101 @Branch: master @Commit: bd07c4e0727fa104d50e28ed70ca9bb480dcbc1b, 64bit AOT
-
+BenchmarkDotNet=v0.12.0, OS=Windows 10.0.17763.805 (1809/October2018Update/Redstone5)
+AMD Ryzen 7 3700X, 1 CPU, 16 logical and 8 physical cores
+.NET Core SDK=3.0.100
+  [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+  Job-QLWSMO : .NET Framework 4.8 (4.8.4018.0), X64 RyuJIT
+  Job-SAPYYF : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+  Job-EHTIZJ : .NET CoreRT 1.0.28308.01 @BuiltBy: dlab14-DDVSOWINAGE101 @Branch: master @Commit: 9a30f4b28cbba5d3f074a10e05fc63c537308ad7, X64 AOT
 
 ```
-|            Method |    Job | Runtime |              Number |        Mean |     Error |    StdDev |      Median | Ratio | RatioSD | Rank |
-|------------------ |------- |-------- |-------------------- |------------:|----------:|----------:|------------:|------:|--------:|-----:|
-|             **Spell** |    **Clr** |     **Clr** |         **-2147483648** | **1,016.06 ns** | **16.317 ns** | **14.465 ns** | **1,016.69 ns** |  **1.00** |    **0.00** |    **1** |
-|             Spell |   Core |    Core |         -2147483648 | 1,284.87 ns | 25.823 ns | 60.869 ns | 1,268.86 ns |  1.31 |    0.07 |    2 |
-|             Spell | CoreRT |  CoreRT |         -2147483648 | 1,032.39 ns | 22.565 ns | 18.843 ns | 1,025.03 ns |  1.02 |    0.02 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-| SpellFemaleGender |    Clr |     Clr |         -2147483648 | 1,229.31 ns | 24.646 ns | 59.991 ns | 1,220.80 ns |  1.00 |    0.00 |    2 |
-| SpellFemaleGender |   Core |    Core |         -2147483648 | 1,259.07 ns | 22.465 ns | 19.915 ns | 1,257.73 ns |  1.06 |    0.09 |    3 |
-| SpellFemaleGender | CoreRT |  CoreRT |         -2147483648 | 1,034.77 ns | 29.322 ns | 27.428 ns | 1,030.57 ns |  0.87 |    0.07 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-|             **Spell** |    **Clr** |     **Clr** |             **-235235** |   **631.59 ns** | **30.357 ns** | **85.124 ns** |   **606.30 ns** |  **1.00** |    **0.00** |    **2** |
-|             Spell |   Core |    Core |             -235235 |   583.69 ns | 10.224 ns |  8.538 ns |   580.08 ns |  0.93 |    0.13 |    2 |
-|             Spell | CoreRT |  CoreRT |             -235235 |   475.13 ns |  3.792 ns |  3.547 ns |   474.65 ns |  0.75 |    0.10 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-| SpellFemaleGender |    Clr |     Clr |             -235235 |   566.16 ns | 11.207 ns | 11.007 ns |   563.20 ns |  1.00 |    0.00 |    2 |
-| SpellFemaleGender |   Core |    Core |             -235235 |   588.63 ns | 11.498 ns | 12.303 ns |   584.97 ns |  1.04 |    0.02 |    3 |
-| SpellFemaleGender | CoreRT |  CoreRT |             -235235 |   535.75 ns | 21.356 ns | 61.273 ns |   511.48 ns |  0.97 |    0.13 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-|             **Spell** |    **Clr** |     **Clr** |                   **1** |    **60.45 ns** |  **1.331 ns** |  **2.150 ns** |    **60.22 ns** |  **1.00** |    **0.00** |    **2** |
-|             Spell |   Core |    Core |                   1 |    65.29 ns |  1.447 ns |  2.337 ns |    64.48 ns |  1.08 |    0.06 |    3 |
-|             Spell | CoreRT |  CoreRT |                   1 |    52.45 ns |  1.709 ns |  2.223 ns |    51.83 ns |  0.87 |    0.05 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-| SpellFemaleGender |    Clr |     Clr |                   1 |    57.04 ns |  1.278 ns |  2.696 ns |    56.11 ns |  1.00 |    0.00 |    1 |
-| SpellFemaleGender |   Core |    Core |                   1 |    64.86 ns |  1.168 ns |  1.036 ns |    64.95 ns |  1.08 |    0.06 |    2 |
-| SpellFemaleGender | CoreRT |  CoreRT |                   1 |    64.08 ns |  2.827 ns |  8.200 ns |    63.19 ns |  1.14 |    0.18 |    2 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-|             **Spell** |    **Clr** |     **Clr** |                **1002** |   **169.20 ns** |  **4.064 ns** | **10.919 ns** |   **168.24 ns** |  **1.00** |    **0.00** |    **2** |
-|             Spell |   Core |    Core |                1002 |   169.75 ns |  3.496 ns |  3.740 ns |   168.76 ns |  1.01 |    0.05 |    2 |
-|             Spell | CoreRT |  CoreRT |                1002 |   129.21 ns |  1.403 ns |  1.244 ns |   129.03 ns |  0.77 |    0.04 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-| SpellFemaleGender |    Clr |     Clr |                1002 |   170.82 ns |  3.540 ns |  4.602 ns |   169.43 ns |  1.00 |    0.00 |    3 |
-| SpellFemaleGender |   Core |    Core |                1002 |   143.26 ns |  1.861 ns |  1.554 ns |   142.85 ns |  0.84 |    0.02 |    2 |
-| SpellFemaleGender | CoreRT |  CoreRT |                1002 |   127.31 ns |  1.375 ns |  1.286 ns |   127.17 ns |  0.75 |    0.02 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-|             **Spell** |    **Clr** |     **Clr** |               **10000** |   **116.12 ns** |  **1.996 ns** |  **2.298 ns** |   **115.55 ns** |  **1.00** |    **0.00** |    **2** |
-|             Spell |   Core |    Core |               10000 |   115.10 ns |  1.476 ns |  1.309 ns |   114.93 ns |  0.99 |    0.02 |    2 |
-|             Spell | CoreRT |  CoreRT |               10000 |   104.75 ns |  1.154 ns |  1.023 ns |   104.41 ns |  0.90 |    0.02 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-| SpellFemaleGender |    Clr |     Clr |               10000 |   116.35 ns |  1.439 ns |  1.124 ns |   116.71 ns |  1.00 |    0.00 |    2 |
-| SpellFemaleGender |   Core |    Core |               10000 |   120.17 ns |  2.552 ns |  4.918 ns |   118.36 ns |  1.05 |    0.05 |    3 |
-| SpellFemaleGender | CoreRT |  CoreRT |               10000 |   104.93 ns |  1.602 ns |  1.421 ns |   104.74 ns |  0.90 |    0.02 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-|             **Spell** |    **Clr** |     **Clr** |          **4263246324** | **1,126.78 ns** | **20.616 ns** | **19.284 ns** | **1,128.55 ns** |  **1.00** |    **0.00** |    **2** |
-|             Spell |   Core |    Core |          4263246324 | 1,179.06 ns | 21.420 ns | 20.037 ns | 1,176.84 ns |  1.05 |    0.02 |    3 |
-|             Spell | CoreRT |  CoreRT |          4263246324 |   980.51 ns | 18.237 ns | 17.059 ns |   983.92 ns |  0.87 |    0.02 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-| SpellFemaleGender |    Clr |     Clr |          4263246324 | 1,162.81 ns | 23.290 ns | 36.940 ns | 1,155.90 ns |  1.00 |    0.00 |    2 |
-| SpellFemaleGender |   Core |    Core |          4263246324 | 1,162.11 ns | 19.349 ns | 17.152 ns | 1,156.62 ns |  0.99 |    0.04 |    2 |
-| SpellFemaleGender | CoreRT |  CoreRT |          4263246324 |   973.65 ns | 19.228 ns | 17.986 ns |   974.58 ns |  0.83 |    0.03 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-|             **Spell** |    **Clr** |     **Clr** | **9223372036854775807** | **2,247.79 ns** | **35.644 ns** | **33.341 ns** | **2,255.14 ns** |  **1.00** |    **0.00** |    **2** |
-|             Spell |   Core |    Core | 9223372036854775807 | 2,325.08 ns | 40.763 ns | 38.130 ns | 2,311.87 ns |  1.03 |    0.02 |    3 |
-|             Spell | CoreRT |  CoreRT | 9223372036854775807 | 1,970.91 ns | 39.267 ns | 59.965 ns | 1,949.59 ns |  0.88 |    0.04 |    1 |
-|                   |        |         |                     |             |           |           |             |       |         |      |
-| SpellFemaleGender |    Clr |     Clr | 9223372036854775807 | 2,228.39 ns | 34.080 ns | 28.458 ns | 2,226.92 ns |  1.00 |    0.00 |    2 |
-| SpellFemaleGender |   Core |    Core | 9223372036854775807 | 2,443.84 ns | 48.778 ns | 45.627 ns | 2,436.71 ns |  1.10 |    0.03 |    3 |
-| SpellFemaleGender | CoreRT |  CoreRT | 9223372036854775807 | 1,892.42 ns | 31.617 ns | 28.028 ns | 1,882.46 ns |  0.85 |    0.02 |    1 |
+|            Method |       Runtime |              Number |      Mean |     Error |   StdDev | Ratio | RatioSD | Rank |  Gen 0 |  Gen 1 | Gen 2 | Allocated |
+|------------------ |-------------- |-------------------- |----------:|----------:|---------:|------:|--------:|-----:|-------:|-------:|------:|----------:|
+|             **Spell** |    **.NET 4.7.2** |         **-2147483648** | **500.78 ns** |  **6.394 ns** | **5.981 ns** |  **1.00** |    **0.00** |    **2** | **1.7376** |      **-** |     **-** |    **2279 B** |
+|             Spell | .NET Core 3.0 |         -2147483648 | 507.10 ns |  9.873 ns | 9.697 ns |  1.01 |    0.02 |    2 | 0.2651 |      - |     - |    2224 B |
+|             Spell |    CoreRt 3.0 |         -2147483648 | 433.47 ns |  2.512 ns | 2.227 ns |  0.87 |    0.01 |    1 | 0.2656 | 0.0005 |     - |    2224 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+| SpellFemaleGender |    .NET 4.7.2 |         -2147483648 | 499.91 ns |  7.593 ns | 7.103 ns |  1.00 |    0.00 |    3 | 1.7376 |      - |     - |    2279 B |
+| SpellFemaleGender | .NET Core 3.0 |         -2147483648 | 482.57 ns |  1.775 ns | 1.482 ns |  0.97 |    0.01 |    2 | 0.2651 |      - |     - |    2224 B |
+| SpellFemaleGender |    CoreRt 3.0 |         -2147483648 | 435.97 ns |  2.908 ns | 2.720 ns |  0.87 |    0.01 |    1 | 0.2656 | 0.0005 |     - |    2224 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+|             **Spell** |    **.NET 4.7.2** |             **-235235** | **257.34 ns** |  **3.102 ns** | **2.750 ns** |  **1.00** |    **0.00** |    **2** | **0.7648** |      **-** |     **-** |    **1003 B** |
+|             Spell | .NET Core 3.0 |             -235235 | 255.91 ns |  1.606 ns | 1.341 ns |  0.99 |    0.01 |    2 | 0.1154 |      - |     - |     968 B |
+|             Spell |    CoreRt 3.0 |             -235235 | 222.33 ns |  1.637 ns | 1.531 ns |  0.86 |    0.01 |    1 | 0.1156 |      - |     - |     968 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+| SpellFemaleGender |    .NET 4.7.2 |             -235235 | 258.00 ns |  1.055 ns | 0.935 ns |  1.00 |    0.00 |    2 | 0.7648 |      - |     - |    1003 B |
+| SpellFemaleGender | .NET Core 3.0 |             -235235 | 256.11 ns |  1.712 ns | 1.602 ns |  0.99 |    0.01 |    2 | 0.1154 |      - |     - |     968 B |
+| SpellFemaleGender |    CoreRt 3.0 |             -235235 | 224.65 ns |  0.896 ns | 0.795 ns |  0.87 |    0.00 |    1 | 0.1156 |      - |     - |     968 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+|             **Spell** |    **.NET 4.7.2** |                   **1** |  **27.00 ns** |  **0.085 ns** | **0.079 ns** |  **1.00** |    **0.00** |    **3** | **0.0245** |      **-** |     **-** |      **32 B** |
+|             Spell | .NET Core 3.0 |                   1 |  26.65 ns |  0.078 ns | 0.069 ns |  0.99 |    0.00 |    2 | 0.0038 |      - |     - |      32 B |
+|             Spell |    CoreRt 3.0 |                   1 |  25.71 ns |  0.080 ns | 0.075 ns |  0.95 |    0.01 |    1 | 0.0038 |      - |     - |      32 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+| SpellFemaleGender |    .NET 4.7.2 |                   1 |  26.89 ns |  0.092 ns | 0.086 ns |  1.00 |    0.00 |    1 | 0.0245 |      - |     - |      32 B |
+| SpellFemaleGender | .NET Core 3.0 |                   1 |  27.00 ns |  0.108 ns | 0.096 ns |  1.00 |    0.00 |    1 | 0.0038 |      - |     - |      32 B |
+| SpellFemaleGender |    CoreRt 3.0 |                   1 |  27.62 ns |  0.153 ns | 0.143 ns |  1.03 |    0.01 |    2 | 0.0038 |      - |     - |      32 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+|             **Spell** |    **.NET 4.7.2** |                **1002** |  **59.45 ns** |  **0.634 ns** | **0.593 ns** |  **1.00** |    **0.00** |    **2** | **0.1162** |      **-** |     **-** |     **152 B** |
+|             Spell | .NET Core 3.0 |                1002 |  59.86 ns |  0.427 ns | 0.400 ns |  1.01 |    0.01 |    2 | 0.0172 |      - |     - |     144 B |
+|             Spell |    CoreRt 3.0 |                1002 |  56.06 ns |  0.461 ns | 0.432 ns |  0.94 |    0.01 |    1 | 0.0172 |      - |     - |     144 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+| SpellFemaleGender |    .NET 4.7.2 |                1002 |  60.41 ns |  0.632 ns | 0.591 ns |  1.00 |    0.00 |    2 | 0.1162 |      - |     - |     152 B |
+| SpellFemaleGender | .NET Core 3.0 |                1002 |  58.69 ns |  0.378 ns | 0.316 ns |  0.97 |    0.01 |    1 | 0.0172 |      - |     - |     144 B |
+| SpellFemaleGender |    CoreRt 3.0 |                1002 |  57.90 ns |  0.387 ns | 0.323 ns |  0.96 |    0.01 |    1 | 0.0172 |      - |     - |     144 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+|             **Spell** |    **.NET 4.7.2** |               **10000** |  **46.91 ns** |  **0.230 ns** | **0.215 ns** |  **1.00** |    **0.00** |    **2** | **0.0918** |      **-** |     **-** |     **120 B** |
+|             Spell | .NET Core 3.0 |               10000 |  43.16 ns |  0.200 ns | 0.187 ns |  0.92 |    0.01 |    1 | 0.0134 |      - |     - |     112 B |
+|             Spell |    CoreRt 3.0 |               10000 |  43.94 ns |  0.821 ns | 0.768 ns |  0.94 |    0.02 |    1 | 0.0134 |      - |     - |     112 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+| SpellFemaleGender |    .NET 4.7.2 |               10000 |  46.52 ns |  0.132 ns | 0.117 ns |  1.00 |    0.00 |    2 | 0.0918 |      - |     - |     120 B |
+| SpellFemaleGender | .NET Core 3.0 |               10000 |  45.06 ns |  0.696 ns | 0.651 ns |  0.97 |    0.01 |    1 | 0.0134 |      - |     - |     112 B |
+| SpellFemaleGender |    CoreRt 3.0 |               10000 |  45.34 ns |  0.299 ns | 0.249 ns |  0.97 |    0.01 |    1 | 0.0134 |      - |     - |     112 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+|             **Spell** |    **.NET 4.7.2** |          **4263246324** | **467.03 ns** |  **1.681 ns** | **1.313 ns** |  **1.00** |    **0.00** |    **2** | **1.4935** |      **-** |     **-** |    **1958 B** |
+|             Spell | .NET Core 3.0 |          4263246324 | 483.30 ns |  9.560 ns | 8.942 ns |  1.04 |    0.02 |    3 | 0.2265 | 0.0005 |     - |    1896 B |
+|             Spell |    CoreRt 3.0 |          4263246324 | 410.73 ns |  5.675 ns | 5.309 ns |  0.88 |    0.01 |    1 | 0.2265 |      - |     - |    1896 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+| SpellFemaleGender |    .NET 4.7.2 |          4263246324 | 467.92 ns |  6.027 ns | 5.637 ns |  1.00 |    0.00 |    2 | 1.4935 |      - |     - |    1958 B |
+| SpellFemaleGender | .NET Core 3.0 |          4263246324 | 468.28 ns |  2.334 ns | 2.069 ns |  1.00 |    0.01 |    2 | 0.2265 |      - |     - |    1896 B |
+| SpellFemaleGender |    CoreRt 3.0 |          4263246324 | 408.05 ns |  2.160 ns | 2.021 ns |  0.87 |    0.01 |    1 | 0.2265 |      - |     - |    1896 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+|             **Spell** |    **.NET 4.7.2** | **9223372036854775807** | **929.21 ns** |  **8.189 ns** | **7.660 ns** |  **1.00** |    **0.00** |    **3** | **3.2377** |      **-** |     **-** |    **4245 B** |
+|             Spell | .NET Core 3.0 | 9223372036854775807 | 912.10 ns |  8.501 ns | 7.099 ns |  0.98 |    0.01 |    2 | 0.4921 | 0.0010 |     - |    4120 B |
+|             Spell |    CoreRt 3.0 | 9223372036854775807 | 800.59 ns |  6.132 ns | 5.436 ns |  0.86 |    0.01 |    1 | 0.4921 | 0.0010 |     - |    4120 B |
+|                   |               |                     |           |           |          |       |         |      |        |        |       |           |
+| SpellFemaleGender |    .NET 4.7.2 | 9223372036854775807 | 935.10 ns | 10.007 ns | 9.361 ns |  1.00 |    0.00 |    2 | 3.2377 |      - |     - |    4245 B |
+| SpellFemaleGender | .NET Core 3.0 | 9223372036854775807 | 937.46 ns |  7.143 ns | 6.682 ns |  1.00 |    0.01 |    2 | 0.4921 | 0.0010 |     - |    4120 B |
+| SpellFemaleGender |    CoreRt 3.0 | 9223372036854775807 | 796.29 ns |  3.946 ns | 3.498 ns |  0.85 |    0.01 |    1 | 0.4921 | 0.0010 |     - |    4120 B |
 
 ## Licensing
 MIT License
 
 ## Reference
-The library is aware of [gramatical gender](https://en.wikipedia.org/wiki/Grammatical_gender).
+The library is aware of [grammatical gender](https://en.wikipedia.org/wiki/Grammatical_gender).
 
 The library supports spelling ordinal numbers.
 

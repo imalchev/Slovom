@@ -4,7 +4,7 @@ using Slovom.Internal.OrdinalSpellers;
 namespace Slovom
 {
     /// <summary>
-    /// Implementation of INumberSpeller interface for Bulgarian language.
+    /// Implementation of <see cref="INumberSpeller"/> interface for Bulgarian language.
     /// </summary>
     /// <threadsafety static="true" instance="true">
     /// Each instance method of this class is thread safe.
@@ -42,9 +42,9 @@ namespace Slovom
         }
 
         /// <summary>
-        /// Spells number 
+        /// Spells number.
         /// </summary>
-        /// <param name="number">The integer number to spell</param>
+        /// <param name="number">The integer number to spell.</param>
         /// <param name="gender">The gender to spell. This matters only for the singular part of the number: "един", "една", "едно".</param>
         public string Spell(long number, Gender gender = Gender.Neutral)
         {
@@ -61,11 +61,12 @@ namespace Slovom
         }
 
         /// <summary>
-        /// 
+        /// Spells <paramref name="number"/> in ordinal manner based on the <paramref name="gender"/>.
         /// </summary>
-        /// <param name="number"></param>
-        /// <param name="gender"></param>
-        /// <returns></returns>
+        /// <remarks>
+        /// This spells the so called "редна форма". 
+        /// Example: "първи, първа, първо, втори, втора, второ ...."
+        /// </remarks>
         public string SpellOrdinal(long number, Gender gender = Gender.Neutral)
         {
             bool isNegative = false;

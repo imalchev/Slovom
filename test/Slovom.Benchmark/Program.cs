@@ -1,10 +1,14 @@
 ﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
 
 namespace Slovom.Benchmark
 {
-    [ClrJob(baseline: true), CoreJob, CoreRtJob]
+    [SimpleJob(RuntimeMoniker.Net472, baseline: true)]
+    [SimpleJob(RuntimeMoniker.NetCoreApp30)]
+    [SimpleJob(RuntimeMoniker.CoreRt30)]
     [RPlotExporter, RankColumn]
+    [MemoryDiagnoser]
     public class Speller
     {
         private INumberSpeller _speller = new BgNumberSpeller();
